@@ -2,17 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
   background-color: #f0f0f0;
 }
 
 .form-box {
   background: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
   text-align: center;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
 input {
@@ -20,7 +25,8 @@ input {
   padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 button {
@@ -30,19 +36,20 @@ button {
   border: none;
   color: white;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-a {
+.link {
   color: #007bff;
   cursor: pointer;
 }
 
-a:hover {
+.link:hover {
   text-decoration: underline;
 }
