@@ -15,7 +15,7 @@ export default function Login() {
     let validado = verificarLogin(email, senha);  
 
     if (validado) {
-      navigate('/home');
+      navigate('/shop');
     } else {
       setError('Email ou senha incorretos');
     }
