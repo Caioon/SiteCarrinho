@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import './login.css';
+import { verificarLogin } from './sessionManager';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,14 +12,9 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    let validado = verificarLogin(email, senha);  
 
-    const user = usuarios.find(u => u.email === email && u.senha === senha);
-
-    if (user) {
-      localStorage.setItem('logado', 'true');
-      localStorage.setItem('usuarioAtual', email);
-      setError('');
+    if (validado) {
       navigate('/home');
     } else {
       setError('Email ou senha incorretos');

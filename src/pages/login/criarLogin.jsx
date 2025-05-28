@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { verificarConta } from './sessionManager';
 import './login.css';
 
 export default function CriarLogin() {
@@ -10,24 +11,15 @@ export default function CriarLogin() {
 
   const handleCadastro = (e) => {
     e.preventDefault();
+    
+    let validado = verificarConta(email, senha);
 
-    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-
-    if (usuarios.find(u => u.email === email)) {
-      setError('Email já cadastrado');
-      return;
+    if(validado){
+      alert('Login criado com sucesso!');
+      navigate('/login');
+    } else{
+      setError('Email já cadastrado');    
     }
-
-    usuarios.push({ email, senha });
-
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-    alert('Cadastro realizado com sucesso!');
-    setError('');
-    setEmail('');
-    setSenha('');
-
-    navigate('/login');
   };
 
   return (
