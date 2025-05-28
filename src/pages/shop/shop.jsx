@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Produtos from '../../components/produtos/Produtos';
 import Carrinho from '../../components/carrinho/Carrinho';
-import './home.css';
+import './shop.css';
 
-export default function Home() {
+export default function Shop() {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
