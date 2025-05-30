@@ -1,0 +1,94 @@
+.criar-Produto {
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;    
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.navegar {
+  padding: 10px 20px;
+  width: 300px;
+  margin: 5px;
+  margin-top: 15px;
+  background-color: #FF6600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navegar:hover {
+  background-color: #e05500;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 15px;
+  margin-top: 20px;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.input-Produto {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  outline-color: #FF6600;
+  transition: border-color 0.3s ease;
+}
+
+.input-Produto:focus{
+  border-color: #FF6600;
+}
+
+form button[type="submit"] {
+  background-color: #0077cc;
+  margin-top: 10px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #005fa3;
+}
+
+p[style] {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+
+.cadastrar {
+  padding: 10px 20px;
+  width: 300px;
+  margin: 5px;
+  margin-top: 15px;
+  background-color: #0044ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cadastrar:hover {
+  background-color: #0011ff;
+}
