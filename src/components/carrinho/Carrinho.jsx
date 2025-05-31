@@ -1,7 +1,15 @@
 import React from 'react';
 import './Carrinho.css';
+import { useNavigate } from 'react-router';
 
 export default function Carrinho({ items, onRemove }) {
+    const navigate = useNavigate();
+
+    const finalizarCompra = () => {
+      alert('Compra finalizada!');
+      navigate('/home');
+    };
+
   return (
     <div className="right">
       <h2>Carrinho de Compras</h2>
@@ -15,7 +23,7 @@ export default function Carrinho({ items, onRemove }) {
           </div>
         </div>
       ))}
-      {items.length > 0 && <button className="checkout-btn">Finalizar Compra</button>}
+      {items.length > 0 && <button className="checkout-btn" onClick={finalizarCompra}>Finalizar Compra</button>}
     </div>
   );
 }

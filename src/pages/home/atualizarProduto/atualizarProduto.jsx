@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router';
-import { produtos } from "../../../components/produtos/produtosData";
+import { useEffect } from "react";
 import Modal from "./modalAtualizarProduto";
 import './modalAtualizarProduto.css';
+import { LerProdutos } from "../../../components/data/fetchProdutos";
+import { AtualizarProduto } from "../../../components/data/fetchProdutos";
 
 export default function AtualizarProdutos() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +13,13 @@ export default function AtualizarProdutos() {
   const [nomeProduto, setNomeProduto] = useState('');
   const [precoProduto, setPrecoProduto] = useState('');
   const [urlProduto, setUrlProduto] = useState('');
+  const [error, setError] = useState('');
+
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    LerProdutos(setProdutos);
+  }, []);
     
   const navigate = useNavigate();
 
@@ -24,9 +33,31 @@ export default function AtualizarProdutos() {
     setProdutoSelecionado(null);
   };
 
-  const atualizarProduto = (nomeProduto, valorProduto, urlProduto) => {
-   alert('Produto atualizado! (Função meramente ilustrativa)'); 
-   navigate('/home');
+  function validarPreco(n) {
+      let numero = Number(n);
+      return typeof numero === 'number' && !isNaN(numero) && numero >= 0;
+  }
+
+  const editarProduto = () => {
+
+    if (nomeProduto.trim() === '' || precoProduto === '') {
+      setError('Preencha os campos de nome e valor!');
+      return;
+    }
+
+    if (!validarPreco(precoProduto)) {
+      setError('Valor do produto inválido!');
+      return;
+    }
+
+    const valorFloat = Number(precoProduto);
+    const id = produtoSelecionado.id;
+
+    const imagemFinal = urlProduto.trim() === '' ? produtoSelecionado.imagem : urlProduto;
+
+    AtualizarProduto(id, nomeProduto, valorFloat, imagemFinal);
+    alert('Produto atualizado!');
+    navigate('/home');
   };
 
   return (
@@ -48,7 +79,7 @@ export default function AtualizarProdutos() {
     <button className="back-btn" onClick={() => navigate('/home')}>Home</button>
 
     {isModalOpen && (
-    <Modal isOpen={isModalOpen} onClose={fecharModal} update={atualizarProduto}>
+    <Modal isOpen={isModalOpen} onClose={fecharModal} update={editarProduto}>
 
         <h2>Editar Produto</h2>
         <img className="modal-img" src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} />
@@ -57,14 +88,15 @@ export default function AtualizarProdutos() {
         <input type="text" placeholder='Insira o novo nome' value = {nomeProduto} onChange={(e) => setNomeProduto(e.target.value)}/>
         
         <p>Valor Atual: R${produtoSelecionado.valor.toFixed(2)}</p>
-        <input type="number" placeholder='Insira o novo valor' value = {precoProduto} onChange={(e) => setPrecoProduto(e.target.value)}/>
+        <input type="text" placeholder='Insira o novo valor' value = {precoProduto} onChange={(e) => setPrecoProduto(e.target.value)}/>
 
         <p>Url para nova imagem (deixar em branco caso queira manter a atual):</p>
         <input type="text" placeholder='Insira a url' value = {urlProduto} onChange={(e) => setUrlProduto(e.target.value)}/>
+        
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
     </Modal> )}
 
     </div>
   );
 }
-

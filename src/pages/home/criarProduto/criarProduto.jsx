@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './criarProduto.css';
 import ModalCriarProduto from "./modalCriarProduto";
 import "./modalCriarProduto.css";
+import { CadastrarProduto } from "../../../components/data/fetchProdutos";
 
 export default function CriarProduto(){
 
@@ -22,11 +23,19 @@ export default function CriarProduto(){
         setIsModalOpen(false);
     };
 
+    function validarPreco(n) {
+        let numero = Number(n);
+        return typeof numero === 'number' && !isNaN(numero) && numero >= 0;
+    }
+
     const navigate = useNavigate();
 
     const verificarCampos = (nomeProduto, valor, url) => {
         if(nomeProduto == '' || valor == '' || url == '')
             setError('Preencha todos os campos!');
+        else if (!validarPreco(valor)){
+            setError('Valor do produto inválido!');
+        }
         else{
             setError('');
             abrirModal();
@@ -34,7 +43,9 @@ export default function CriarProduto(){
     }
     const cadastrarProduto = (e) => {
         e.preventDefault();
-        alert('Produto cadastrado com sucesso! (função meramente ilustrativa)');
+        let valorFloat = Number(valor);
+        CadastrarProduto(nomeProduto, valorFloat, url);
+        alert('Produto cadastrado com sucesso!');
         navigate('/home');
     }
 

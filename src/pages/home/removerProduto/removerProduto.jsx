@@ -3,11 +3,20 @@ import { produtos } from "../../../components/produtos/produtosData";
 import { useState } from "react";
 import ModalRemoverProduto from "./modalRemoverProduto";
 import "./modalRemoverProduto.css";
+import { useEffect } from "react";
+import { LerProdutos } from "../../../components/data/fetchProdutos";
+import { DeletarProduto } from "../../../components/data/fetchProdutos";
 
 export default function RemoverProduto(){
 
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+        LerProdutos(setProdutos);
+    }, []);
 
     const abrirModal = (produto) => {
         setProdutoSelecionado(produto);
@@ -19,8 +28,12 @@ export default function RemoverProduto(){
         setProdutoSelecionado(null);
     };
 
-    const removerProduto = (p) => {
-        alert('Produto removido com sucesso! (função meramente ilustrativa)');
+    const removerProduto = () => {
+        console.log(produtoSelecionado);
+        const id = produtoSelecionado.id;
+        console.log(id);
+        DeletarProduto(id);
+        alert('Produto removido com sucesso!');
         navigate('/home');
     }
 

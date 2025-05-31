@@ -1,11 +1,9 @@
 import React from 'react';
-import { produtos } from './produtosData';
 import './Produtos.css';
 
-export default function Produtos({ onAdd }) {
+export default function Produtos({ produtos, onAdd }) {
   return (
     <>
-      <h2>Produtos Disponíveis</h2>
       <div className="produtos-grid">
         {produtos.map((p, idx) => (
           <div key={idx} className="product-card">

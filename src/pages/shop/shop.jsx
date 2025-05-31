@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Produtos from '../../components/produtos/Produtos';
 import Carrinho from '../../components/carrinho/Carrinho';
+import { LerProdutos } from '../../components/data/fetchProdutos'; 
 import './shop.css';
 
 export default function Shop() {
   const [cartItems, setCartItems] = useState([]);
+  const [produtos, setProdutos] = useState([]);  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +17,10 @@ export default function Shop() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    LerProdutos(setProdutos);
+  }, []);
+
   const handleAdd = produto => {
     setCartItems(prev => [...prev, produto]);
   };
@@ -23,19 +29,13 @@ export default function Shop() {
     setCartItems(prev => prev.filter((_, i) => i !== index));
   };
 
-  const handleLogout = () => {
-    localStorage.setItem('logado', 'false');
-    localStorage.removeItem('usuarioAtual');
-    navigate('/login');
-  };
-
   return (
     <div className="container">
       <div className="left">
-        <button className="logout-btn" onClick={handleLogout}>Sair</button>
-        <Produtos onAdd={handleAdd} />
+        <Produtos produtos={produtos} onAdd={handleAdd} />
       </div>
       <Carrinho items={cartItems} onRemove={handleRemove} />
+      <button className="home-btn" onClick={() => navigate('/home')}>Home</button>
     </div>
   );
 }
