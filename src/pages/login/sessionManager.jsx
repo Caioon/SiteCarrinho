@@ -1,15 +1,14 @@
 export function verificarConta(email, senha){
-    console.log('Verificar conta');
-
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
     let user = usuarios.find(u => u.email === email);
 
-    if (!user) {
-        usuarios.push({ email, senha });
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    if (user) {
+        return false;
     }
 
-    return user;
+    usuarios.push({ email, senha });
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    return true;
 }
 
 export function verificarLogin(email, senha){

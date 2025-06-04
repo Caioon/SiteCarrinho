@@ -12,7 +12,7 @@ export default function CriarLogin() {
   const handleCadastro = (e) => {
     e.preventDefault();
     
-    let validado = verificarConta(email, senha);
+    const validado = verificarConta(email, senha);
 
     if(validado){
       alert('Login criado com sucesso!');
